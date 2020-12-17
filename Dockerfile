@@ -8,7 +8,7 @@ RUN java -Djarmode=layertools -jar exchange-rate-service.jar extract
 FROM adoptopenjdk:11-jre-hotspot
 WORKDIR exchange-rate-service
 # Copies the jar layers; each is copied into a different docker image layer; 
-# when making changes to the app only changed layers will be rebuilt, the other layers will be re-used from cache unless --no-cache flag is used
+# When making changes to the app only changed layers will be rebuilt
 COPY --from=builder exchange-rate-service/dependencies/ ./
 COPY --from=builder exchange-rate-service/spring-boot-loader/ ./
 COPY --from=builder exchange-rate-service/snapshot-dependencies/ ./
