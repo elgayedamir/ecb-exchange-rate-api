@@ -1,8 +1,5 @@
 # Exchange Rate Service
 
-## Objective 
-Get familiar with Spring Batch core concepts, patterns and architecture.
-
 ## Overview
 This service exposes a REST API for currencies exchange rates / conversion based on the reference exchange rate published daily by the European Central Bank.
 For more details, check [Requirements.md](./Requirements.md)
