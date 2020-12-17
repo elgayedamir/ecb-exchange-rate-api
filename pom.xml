@@ -68,16 +68,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<!-- Produces a layered jar: different layers will be extracted and 
-						fitted into separate docker image layers, -->
-					<!-- reducing the docker image build time upon introducing changes since 
-						only the layer where the change happened will be rebuilt -->
+					<!-- Produces a layered jar: different layers will be extracted and fitted into separate docker image layers, to optimize the docker image build time-->
 					<layers>
 						<enabled>true</enabled>
 					</layers>
 					<image>
-						<!-- Custom docker image name to be used when using buildpacks to build 
-							cloud native docker image -->
+						<!-- Custom docker image name to be used when using buildpacks to build cloud native docker image -->
 						<name>scalable.de/microservices/${project.artifactId}:${project.version}</name>
 					</image>
 				</configuration>
