@@ -12,6 +12,16 @@ Running the following maven command builds the spring boot application and gener
 ```
 ./mvnw clean package
 ```
+Builds a cloud native docker image using `buildpacks`
+
+```
+./mvnw spring-boot:build-image
+```
+Builds a docker image using `docker engine`
+
+```
+docker build -t scalable.de/microservices/exchange-rate-service:0.0.1-SNAPSHOT .
+```
 
 ## Run
 * Using Maven
@@ -24,4 +34,10 @@ Running the following maven command builds the spring boot application and gener
 
 ```
 java -jar <PATH_TO>/exchange-rate-service.jar
+```
+
+* Running docker image
+
+```
+docker run -p 8080:8080 --name exchange-rate-service-container scalable.de/microservices/exchange-rate-service:0.0.1-SNAPSHOT
 ```

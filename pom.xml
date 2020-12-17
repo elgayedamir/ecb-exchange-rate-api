@@ -21,11 +21,6 @@
 
 	<dependencies>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.commons</groupId> -->
-<!-- 			<artifactId>commons-lang3</artifactId> -->
-<!-- 		</dependency> -->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-batch</artifactId>
@@ -72,6 +67,20 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- Produces a layered jar: different layers will be extracted and 
+						fitted into separate docker image layers, -->
+					<!-- reducing the docker image build time upon introducing changes since 
+						only the layer where the change happened will be rebuilt -->
+					<layers>
+						<enabled>true</enabled>
+					</layers>
+					<image>
+						<!-- Custom docker image name to be used when using buildpacks to build 
+							cloud native docker image -->
+						<name>scalable.de/microservices/${project.artifactId}:${project.version}</name>
+					</image>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

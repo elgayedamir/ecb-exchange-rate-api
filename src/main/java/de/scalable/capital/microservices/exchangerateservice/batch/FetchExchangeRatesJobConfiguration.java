@@ -51,7 +51,10 @@ public class FetchExchangeRatesJobConfiguration {
 				.faultTolerant()
 				//skip if a speech record is not valid in the CSV file
 				.skip(FlatFileParseException.class)
-				.skipLimit(100)
+				.skipLimit(2)
+				//retry when failed to acquire the remote CSV file
+				.retry(IOException.class)
+				.retryLimit(5)
 				.build();
 	}
 	
