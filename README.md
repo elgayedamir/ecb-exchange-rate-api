@@ -4,6 +4,11 @@
 This service exposes a REST API for currencies exchange rates / conversion based on the reference exchange rate published daily by the European Central Bank.
 For more details, check [Requirements.md](./Requirements.md)
 
+## Details
+Uses spring-batch to fetch the reference exchange rates published by the European Central Bank as a zipped CSV file, data is fetched on application
+startup then every day at 16:30 (data is published  by ECB daily at 16:00).  
+Data about exchange rates and fetch batch jobs are maintained in memory.
+
 
 ## Build
 

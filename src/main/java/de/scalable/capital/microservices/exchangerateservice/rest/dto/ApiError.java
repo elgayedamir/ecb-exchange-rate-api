@@ -1,4 +1,4 @@
-package de.scalable.capital.microservices.exchangerateservice.rest;
+package de.scalable.capital.microservices.exchangerateservice.rest.dto;
 
 /**
  * This class serves as a DTO for errors returned by the REST API end-points 

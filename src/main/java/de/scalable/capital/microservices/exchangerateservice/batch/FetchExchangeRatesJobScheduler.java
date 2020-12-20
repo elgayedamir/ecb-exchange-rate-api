@@ -22,8 +22,9 @@ public class FetchExchangeRatesJobScheduler {
 	@Autowired
 	private Job job;
 	
-	//Schedule fetching exchange rate job from european central bank every day at 16:30; the rates gets published at 16; leaving some buffer
-    @Scheduled(cron = "0 0 16 * * *")
+	//Schedule fetching exchange rate job from european central bank to execute every day at 16:30;
+	//the rates gets published at 16:00;
+    @Scheduled(cron = "0 30 16 * * *", zone = "CET")
     public void perform() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
         JobParameters params = new JobParametersBuilder().addLong("JobId", System.currentTimeMillis()).toJobParameters();
         jobLauncher.run(job, params);

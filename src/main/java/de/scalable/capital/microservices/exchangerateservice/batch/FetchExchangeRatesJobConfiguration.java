@@ -28,7 +28,7 @@ public class FetchExchangeRatesJobConfiguration {
 	
 	private static final String FETCH_CURRENCY_RATE_BATCH_JOB_NAME = "fetch_currency_rate_job";
 	private static final String FETCH_CURRENCY_RATE_STEP_NAME = "fetch_currency_rate_step";
-	private static final int STEP_CHUNK_SIZE = 100;
+	private static final int STEP_CHUNK_SIZE = 2;
 	private static final URI ECB_DAILY_CSV_EXCHANGE_RATES_URL = URI.create("https://www.ecb.europa.eu/stats/eurofxref/eurofxref.zip");
 	
 	@Bean
@@ -59,7 +59,7 @@ public class FetchExchangeRatesJobConfiguration {
 	}
 	
 	@Bean
-	public ItemReader<String> csvFileReader(LineMapper<String> mapper) throws IOException {
+	public ItemReader<String> exchaneRatesCSVFileReader(LineMapper<String> mapper) throws IOException {
 		ZipFileItemReader<String> reader = new ZipFileItemReader<>();
 		reader.setArchive(new UrlResource(ECB_DAILY_CSV_EXCHANGE_RATES_URL));
 		reader.setLineMapper(mapper);

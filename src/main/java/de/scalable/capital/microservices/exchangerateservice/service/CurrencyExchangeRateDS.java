@@ -1,5 +1,6 @@
 package de.scalable.capital.microservices.exchangerateservice.service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
@@ -12,15 +13,17 @@ import org.springframework.stereotype.Component;
 @Scope("singleton")
 public class CurrencyExchangeRateDS {
 	
-	private Date publishedAt;
-	private Map<String, Double> currenciesRate = new ConcurrentHashMap<>();
-	private Map<String, Long> currenciesRequestsCount = new ConcurrentHashMap<>();
+	public static final String EURO_CURRENCY_SYMBOL = "EUR";
 	
-	public void updateCurrencyRates (Map<String, Double> currencyRates, Date publishTime) {
+	private LocalDate publishedAt;
+	private Map<String, Double> currencyRates = new ConcurrentHashMap<>();
+	private Map<String, Long> currencyRequestsCount = new ConcurrentHashMap<>();
+	
+	public void updateCurrencyRates (Map<String, Double> currencyRates, LocalDate publishTime) {
 		this.publishedAt = publishTime;
-		this.currenciesRate.putAll(currencyRates);
-		this.currenciesRate.put("EUR", 1.0);
-		this.currenciesRate.keySet().stream().forEach(currency -> currenciesRequestsCount.put(currency, 0L));
+		this.currencyRates.putAll(currencyRates);
+		this.currencyRates.put(EURO_CURRENCY_SYMBOL, 1.0);
+		this.currencyRates.keySet().stream().forEach(currency -> currencyRequestsCount.putIfAbsent(currency, 0L));
 	}
 	
 	/**
@@ -29,8 +32,8 @@ public class CurrencyExchangeRateDS {
 	 * @return the exchange rate of the given currency against euro
 	 */
 	public Double getCurrencyExchangeRate (String currency) {
-		Double rate = this.currenciesRate.get(currency);
-		currenciesRequestsCount.merge(currency, 1L, Long::sum);
+		Double rate = this.currencyRates.get(currency);
+		currencyRequestsCount.merge(currency, 1L, Long::sum);
 		return rate;
 	}
 	
@@ -39,13 +42,13 @@ public class CurrencyExchangeRateDS {
 	 * @return a map having as key the supported currencies and as value how many times each currency was requested
 	 */
 	public Map<String, Long> getCurrencies() {
-		return Collections.unmodifiableMap(this.currenciesRequestsCount);
+		return Collections.unmodifiableMap(this.currencyRequestsCount);
 	}
 	
 	/**
 	 * @return The {@link Date} this data was published by the European Central Bank
 	 */
-	public Date getPublishedAt() {
+	public LocalDate getPublishedAt() {
 		return this.publishedAt;
 	}
 }
