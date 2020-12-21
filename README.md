@@ -34,6 +34,16 @@ Example:
 * ECB reference Exchange rate of USD (same as EUR/USD):  
 `GET /currency/exchange?base=EUR&currency=USD` | `GET /currency/exchange?currency=USD`
 
+Response:
+
+```
+{
+  "label": "EUR/USD",
+  "publishedAt": "2020-12-18",
+  "result": 1.2259
+}
+```
+
 ### Convert
 Converts a given amount from a currency to another: 15 USD = ??? GBP  
 
@@ -44,6 +54,16 @@ GET /currency/convert?from={from}&to={to}&amount={amount}
 * `to` [optional: defaults to `EUR`] : target currency
 * `amount` [required] : amount to convert
 
+Response:
+
+```
+{
+  "label": "USD/EUR",
+  "publishedAt": "2020-12-18",
+  "amount": 1,
+  "result": 0.8157
+}
+```
 
 #### Interactive chart
 ```
