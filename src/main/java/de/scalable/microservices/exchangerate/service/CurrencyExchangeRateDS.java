@@ -1,4 +1,4 @@
-package de.scalable.capital.microservices.exchangerateservice.service;
+package de.scalable.microservices.exchangerate.service;
 
 import java.time.LocalDate;
 import java.util.Collections;

@@ -1,12 +1,12 @@
-package de.scalable.capital.microservices.exchangerateservice.rest.dto;
+package de.scalable.microservices.exchangerate.rest.dto;
 
 import java.time.LocalDate;
 
-public class ExchangeRateConversionResponse extends ExchangeRateResponse {
+public class AmountConversionResponse extends ExchangeRateResponse {
 	
 	private Double amount;
 	
-	public ExchangeRateConversionResponse(LocalDate publishedAt, String label, Double result, Double amount) {
+	public AmountConversionResponse(LocalDate publishedAt, String label, Double result, Double amount) {
 		super(publishedAt, label, result);
 		this.amount = amount;
 	}

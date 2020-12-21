@@ -9,6 +9,46 @@ Uses spring-batch to fetch the reference exchange rates published by the Europea
 startup then every day at 16:30 (data is published  by ECB daily at 16:00).  
 Data about exchange rates and fetch batch jobs are maintained in memory.
 
+## REST API
+Terminology:   
+* A pair of currency USD/EUR reads 1 USD = ??? EUR  
+* The first currency in the pair is the <b>base currency</b>  
+* ECB publishes a reference exchange rate against EUR as base; <u>ECB reference exchange rate of USD => EUR/USD</u>  
+
+### List of supported currencies
+
+```
+GET /currency
+```
+
+### Exchange rate
+```
+GET /currency/exchange?base={base}&currency={currency}
+```
+* `base` [Double], [optional: defaults to `EUR`]
+* `currency` [Double], [required]
+
+Example: 
+* Exchange rate from USD/GBP:  
+`GET /currency/exchange?base=USD&currency=EUR`
+* ECB reference Exchange rate of USD (same as EUR/USD):  
+`GET /currency/exchange?base=EUR&currency=USD` | `GET /currency/exchange?currency=USD`
+
+### Convert
+Converts a given amount from a currency to another: 15 USD = ??? GBP  
+
+```
+GET /currency/convert?from={from}&to={to}&amount={amount}
+```
+* `from` [required] : base currency
+* `to` [optional: defaults to `EUR`] : target currency
+* `amount` [required] : amount to convert
+
+
+#### Interactive chart
+```
+GET /currency/exchange/interactive?base={base}&currency={currency}
+```
 
 ## Build
 

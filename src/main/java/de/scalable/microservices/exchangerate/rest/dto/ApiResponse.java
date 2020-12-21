@@ -1,4 +1,4 @@
-package de.scalable.capital.microservices.exchangerateservice.rest.dto;
+package de.scalable.microservices.exchangerate.rest.dto;
 
 import java.time.LocalDate;
 

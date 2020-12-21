@@ -1,10 +1,9 @@
-package de.scalable.capital.microservices.exchangerateservice.rest.dto;
+package de.scalable.microservices.exchangerate.rest.dto;
 
 import java.time.LocalDate;
 
 public class ExchangeRateResponse extends ApiResponse{
 	
-
 	private Double result;
 	
 	public ExchangeRateResponse(LocalDate publishedAt, String label, Double result) {

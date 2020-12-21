@@ -1,6 +1,7 @@
-package de.scalable.capital.microservices.exchangerateservice.service;
+package de.scalable.microservices.exchangerate.service;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Objects;
 
@@ -26,21 +27,25 @@ public class ExchangeRateService {
 		return rate;
 	}
 	
-	public Double getExchangeRate(String currency, String baseCurrency) {
+	public Double getExchangeRate(String baseCurrency, String currency) {
 		Double rate = getExchangeRate(currency.toUpperCase());
 		Double baseCurrencyRate = getExchangeRate(baseCurrency.toUpperCase());
 		return baseCurrencyRate/rate;
 	}
 	
-	public URI generateInteractiveExchangeRateLink(String currency, String targetCurrency) {
+	public URI generateInteractiveExchangeRateLink(String baseCurrency, String currency) {
 		getExchangeRate(currency);
-		getExchangeRate(targetCurrency);
-		return URI.create(String.format(INTERACTIVE_EXCHANGE_RATE_CHART_URI, currency, targetCurrency));
+		getExchangeRate(baseCurrency);
+		return URI.create(String.format(INTERACTIVE_EXCHANGE_RATE_CHART_URI, baseCurrency, currency));
 	}
 	
 	
-	public Double convert(Double amount, String currency, String targetCurrency) {
-		Double rate = getExchangeRate(currency, targetCurrency);
+	public Double convert(Double amount, String currency, String baseCurrency) {
+		Double rate = getExchangeRate(baseCurrency, currency);
 		return rate * amount;
+	}
+	
+	public LocalDate getPublishDate () {
+		return dataSource.getPublishedAt();
 	}
 }

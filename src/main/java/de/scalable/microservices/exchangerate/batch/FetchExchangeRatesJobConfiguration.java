@@ -1,4 +1,4 @@
-package de.scalable.capital.microservices.exchangerateservice.batch;
+package de.scalable.microservices.exchangerate.batch;
 
 import java.io.IOException;
 import java.net.URI;

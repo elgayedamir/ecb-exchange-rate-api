@@ -1,4 +1,4 @@
-package de.scalable.capital.microservices.exchangerateservice.batch;
+package de.scalable.microservices.exchangerate.batch;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import de.scalable.capital.microservices.exchangerateservice.service.CurrencyExchangeRateDS;
+import de.scalable.microservices.exchangerate.service.CurrencyExchangeRateDS;
 
 @Component
 public class CurrencyRatesWriter implements ItemWriter<String> {
