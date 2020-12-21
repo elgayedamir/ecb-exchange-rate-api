@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.context.annotation.Scope;
@@ -33,6 +34,8 @@ public class CurrencyRatesDS {
 	 */
 	public Double getCurrencyExchangeRate (String currency) {
 		Double rate = this.currencyRates.get(currency);
+		if (Objects.isNull(rate))
+			throw new IllegalArgumentException(String.format("The requested currency '%s' is not valid or is not supported", currency));
 		currencyRequestsCount.merge(currency, 1L, Long::sum);
 		return rate;
 	}

@@ -26,8 +26,6 @@ public class ExchangeRateService {
 	
 	public Double getExchangeRate(String currency) {
 		Double rate = dataSource.getCurrencyExchangeRate(currency.toUpperCase());
-		if (Objects.isNull(rate))
-			throw new IllegalArgumentException(String.format("The requested currency '%s' is not valid or is not supported", currency));
 		return rate;
 	}
 	
