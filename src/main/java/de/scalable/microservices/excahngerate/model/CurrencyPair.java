@@ -34,6 +34,10 @@ public abstract class CurrencyPair {
 		this.currency = currency;
 	}
 	
+	/**
+	 * Returns a label string on the form 'base/currency'
+	 * @return label string
+	 */
 	public String getLabel() {
 			return String.format(CURRENCY_PAIR_LABEL_FORMAT, base, currency);
 	}

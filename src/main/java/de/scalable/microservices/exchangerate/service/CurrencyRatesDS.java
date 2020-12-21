@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("singleton")
-public class CurrencyExchangeRateDS {
+public class CurrencyRatesDS {
 	
 	public static final String EURO_CURRENCY_SYMBOL = "EUR";
 	

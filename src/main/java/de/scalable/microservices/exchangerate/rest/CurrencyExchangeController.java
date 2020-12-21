@@ -19,7 +19,7 @@ import de.scalable.microservices.excahngerate.model.AmountConversion;
 import de.scalable.microservices.excahngerate.model.ExchangeRate;
 import de.scalable.microservices.excahngerate.model.InteractiveExchangeRate;
 import de.scalable.microservices.exchangerate.rest.dto.ApiError;
-import de.scalable.microservices.exchangerate.service.CurrencyExchangeRateDS;
+import de.scalable.microservices.exchangerate.service.CurrencyRatesDS;
 import de.scalable.microservices.exchangerate.service.ExchangeRateService;
 
 @RestController
@@ -37,7 +37,7 @@ public class CurrencyExchangeController {
 	@GetMapping(path = "/exchange/interactive", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> interactiveExchangeRateLink (
 			@RequestParam(required = true) final String currency, 
-			@RequestParam(defaultValue = CurrencyExchangeRateDS.EURO_CURRENCY_SYMBOL) final String base) {
+			@RequestParam(defaultValue = CurrencyRatesDS.EURO_CURRENCY_SYMBOL) final String base) {
 		
 		InteractiveExchangeRate interactiveExchangeRate = exchangeRateService.generateInteractiveExchangeRateLink(base, currency);
 		return new ResponseEntity<>(
@@ -49,7 +49,7 @@ public class CurrencyExchangeController {
 	@GetMapping(path = "/exchange", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> exchangeRate (
 			@RequestParam(required = true) final String currency, 
-			@RequestParam(defaultValue = CurrencyExchangeRateDS.EURO_CURRENCY_SYMBOL) final String base) {
+			@RequestParam(defaultValue = CurrencyRatesDS.EURO_CURRENCY_SYMBOL) final String base) {
 		
 		ExchangeRate exchangeRate = exchangeRateService.getExchangeRate(base, currency);
 		return new ResponseEntity<>(
@@ -61,7 +61,7 @@ public class CurrencyExchangeController {
 	public ResponseEntity<?> convert (
 			@RequestParam(required = true) final double amount, 
 			@RequestParam(required = true) final String from, 
-			@RequestParam(defaultValue = CurrencyExchangeRateDS.EURO_CURRENCY_SYMBOL) final String to) {
+			@RequestParam(defaultValue = CurrencyRatesDS.EURO_CURRENCY_SYMBOL) final String to) {
 		
 		AmountConversion amountConversion = exchangeRateService.convert(amount, from, to);
 		return new ResponseEntity<>(

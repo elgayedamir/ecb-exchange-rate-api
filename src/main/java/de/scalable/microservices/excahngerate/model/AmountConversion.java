@@ -2,6 +2,9 @@ package de.scalable.microservices.excahngerate.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"label", "publishedAt", "amount", "result"})
 public class AmountConversion extends ExchangeRate {
 	
 	private Double amount;

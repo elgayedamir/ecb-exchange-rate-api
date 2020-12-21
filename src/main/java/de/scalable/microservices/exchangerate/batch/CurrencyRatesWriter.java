@@ -9,8 +9,7 @@ import java.util.Map;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import de.scalable.microservices.exchangerate.service.CurrencyExchangeRateDS;
+import de.scalable.microservices.exchangerate.service.CurrencyRatesDS;
 
 @Component
 public class CurrencyRatesWriter implements ItemWriter<String> {
@@ -22,7 +21,7 @@ public class CurrencyRatesWriter implements ItemWriter<String> {
 	private static final String CSV_EXCHANGE_RATE_PUBLISHING_DATE_FORMAT = "dd MMMM yyyy";
 	
 	@Autowired
-	private CurrencyExchangeRateDS currencyExchangeRateDS;
+	private CurrencyRatesDS dataSource;
 	
 	@Override
 	public void write(List<? extends String> items) throws Exception {
@@ -35,6 +34,6 @@ public class CurrencyRatesWriter implements ItemWriter<String> {
 		
 		String publishDateValue = values[0];
 		LocalDate publishDate = LocalDate.parse(publishDateValue, DateTimeFormatter.ofPattern(CSV_EXCHANGE_RATE_PUBLISHING_DATE_FORMAT));
-		currencyExchangeRateDS.updateCurrencyRates(currenciesRate, publishDate);
+		dataSource.updateCurrencyRates(currenciesRate, publishDate);
 	}
 }

@@ -18,7 +18,7 @@ public class ExchangeRateService {
 	private static final String INTERACTIVE_EXCHANGE_RATE_CHART_URI = "https://www.xe.com/currencycharts/?from=%s&to=%s&view=1Y";
 	
 	@Autowired
-	private CurrencyExchangeRateDS dataSource;
+	private CurrencyRatesDS dataSource;
 	
 	public Map<String, Long> getSupportedCurrencies() {
 		return dataSource.getCurrencies();

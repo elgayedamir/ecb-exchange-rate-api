@@ -49,6 +49,8 @@ GET /currency/convert?from={from}&to={to}&amount={amount}
 ```
 GET /currency/exchange/interactive?base={base}&currency={currency}
 ```
+* `base` [Double], [optional: defaults to `EUR`]
+* `currency` [Double], [required]
 
 ## Build
 
