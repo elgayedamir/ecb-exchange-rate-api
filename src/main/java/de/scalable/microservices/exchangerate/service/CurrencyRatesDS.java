@@ -31,6 +31,7 @@ public class CurrencyRatesDS {
 	 * This method, given a currency, returns its exchange rate against euro (base currency)
 	 * @param currency to fetch its exchange rate
 	 * @return the exchange rate of the given currency against euro
+	 * @throws IllegalArgumentException if the given currency is not supported
 	 */
 	public Double getCurrencyExchangeRate (String currency) {
 		Double rate = this.currencyRates.get(currency);

@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.UrlResource;
 
 /**
- * Configuration for a batch job that downloads the currency exchange rates published by the European Central Bank 
- * <br/>
+ * Configuration for a batch job that downloads the currency exchange rates published by the European Central Bank.
+ * <br>
  * Data is published as a zipped CSV file available for download under "https://www.ecb.europa.eu/stats/eurofxref/eurofxref.zip"
  */
 @Configuration
