@@ -8,9 +8,9 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.scalable.microservices.excahngerate.model.AmountConversion;
-import de.scalable.microservices.excahngerate.model.ExchangeRate;
-import de.scalable.microservices.excahngerate.model.InteractiveExchangeRate;
+import de.scalable.microservices.exchangerate.model.AmountConversion;
+import de.scalable.microservices.exchangerate.model.ExchangeRate;
+import de.scalable.microservices.exchangerate.model.InteractiveExchangeRate;
 
 @Service
 public class ExchangeRateService {

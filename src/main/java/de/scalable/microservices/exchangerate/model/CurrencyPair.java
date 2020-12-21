@@ -1,4 +1,4 @@
-package de.scalable.microservices.excahngerate.model;
+package de.scalable.microservices.exchangerate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

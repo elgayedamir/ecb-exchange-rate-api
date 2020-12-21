@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.scalable.microservices.excahngerate.model.AmountConversion;
-import de.scalable.microservices.excahngerate.model.ExchangeRate;
-import de.scalable.microservices.excahngerate.model.InteractiveExchangeRate;
+import de.scalable.microservices.exchangerate.model.AmountConversion;
+import de.scalable.microservices.exchangerate.model.ExchangeRate;
+import de.scalable.microservices.exchangerate.model.InteractiveExchangeRate;
 import de.scalable.microservices.exchangerate.rest.dto.ApiError;
 import de.scalable.microservices.exchangerate.service.CurrencyRatesDS;
 import de.scalable.microservices.exchangerate.service.ExchangeRateService;
