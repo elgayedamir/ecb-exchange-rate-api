@@ -1,14 +1,13 @@
-package de.scalable.microservices.exchangerate.rest.dto;
+package de.scalable.microservices.excahngerate.model;
 
 import java.net.URI;
-import java.time.LocalDate;
 
-public class InteractiveExchangeRateResponse extends ApiResponse {
+public class InteractiveExchangeRate extends CurrencyPair {
 
 	private URI interactiveChartUri;
 	
-	public InteractiveExchangeRateResponse(LocalDate publishedAt, String label, URI interactiveChartUri) {
-		super(publishedAt, label);
+	public InteractiveExchangeRate(String base, String currency, URI interactiveChartUri) {
+		super(base, currency);
 		this.interactiveChartUri = interactiveChartUri;
 	}
 

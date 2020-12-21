@@ -1,7 +1,5 @@
 package de.scalable.microservices.exchangerate.rest;
 
-import java.net.URI;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,13 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.scalable.microservices.exchangerate.rest.dto.AmountConversionResponse;
+import de.scalable.microservices.excahngerate.model.AmountConversion;
+import de.scalable.microservices.excahngerate.model.ExchangeRate;
+import de.scalable.microservices.excahngerate.model.InteractiveExchangeRate;
 import de.scalable.microservices.exchangerate.rest.dto.ApiError;
-import de.scalable.microservices.exchangerate.rest.dto.ExchangeRateResponse;
-import de.scalable.microservices.exchangerate.rest.dto.InteractiveExchangeRateResponse;
 import de.scalable.microservices.exchangerate.service.CurrencyExchangeRateDS;
 import de.scalable.microservices.exchangerate.service.ExchangeRateService;
-import de.scalable.microservices.exchangerate.util.PairLabel;
 
 @RestController
 @RequestMapping(path = "currency")
@@ -42,10 +39,10 @@ public class CurrencyExchangeController {
 			@RequestParam(required = true) final String currency, 
 			@RequestParam(defaultValue = CurrencyExchangeRateDS.EURO_CURRENCY_SYMBOL) final String base) {
 		
-		URI uri = exchangeRateService.generateInteractiveExchangeRateLink(base, currency);
+		InteractiveExchangeRate interactiveExchangeRate = exchangeRateService.generateInteractiveExchangeRateLink(base, currency);
 		return new ResponseEntity<>(
-				new InteractiveExchangeRateResponse(exchangeRateService.getPublishDate(), PairLabel.from(base, currency), uri)
-				, HttpStatus.OK);
+				interactiveExchangeRate,
+				HttpStatus.OK);
 	}
 	
 	
@@ -54,9 +51,9 @@ public class CurrencyExchangeController {
 			@RequestParam(required = true) final String currency, 
 			@RequestParam(defaultValue = CurrencyExchangeRateDS.EURO_CURRENCY_SYMBOL) final String base) {
 		
-		Double rate = exchangeRateService.getExchangeRate(base, currency);
+		ExchangeRate exchangeRate = exchangeRateService.getExchangeRate(base, currency);
 		return new ResponseEntity<>(
-				new ExchangeRateResponse(exchangeRateService.getPublishDate(), PairLabel.from(base, currency), rate), 
+				exchangeRate, 
 				HttpStatus.OK);
 	}
 	
@@ -66,10 +63,10 @@ public class CurrencyExchangeController {
 			@RequestParam(required = true) final String from, 
 			@RequestParam(defaultValue = CurrencyExchangeRateDS.EURO_CURRENCY_SYMBOL) final String to) {
 		
-		Double convertedAmount = exchangeRateService.convert(amount, from, to);
+		AmountConversion amountConversion = exchangeRateService.convert(amount, from, to);
 		return new ResponseEntity<>(
-				new AmountConversionResponse(exchangeRateService.getPublishDate(), PairLabel.from(to, from), convertedAmount, amount)
-				, HttpStatus.OK);
+				amountConversion,
+				HttpStatus.OK);
 	}
 	
 	@ExceptionHandler(IllegalArgumentException.class)

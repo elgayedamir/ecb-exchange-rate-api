@@ -8,6 +8,10 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import de.scalable.microservices.excahngerate.model.AmountConversion;
+import de.scalable.microservices.excahngerate.model.ExchangeRate;
+import de.scalable.microservices.excahngerate.model.InteractiveExchangeRate;
+
 @Service
 public class ExchangeRateService {
 	
@@ -27,22 +31,22 @@ public class ExchangeRateService {
 		return rate;
 	}
 	
-	public Double getExchangeRate(String baseCurrency, String currency) {
+	public ExchangeRate getExchangeRate(String baseCurrency, String currency) {
 		Double rate = getExchangeRate(currency.toUpperCase());
 		Double baseCurrencyRate = getExchangeRate(baseCurrency.toUpperCase());
-		return baseCurrencyRate/rate;
+		return new ExchangeRate(getPublishDate(), baseCurrency, currency, rate/baseCurrencyRate);
 	}
 	
-	public URI generateInteractiveExchangeRateLink(String baseCurrency, String currency) {
+	public InteractiveExchangeRate generateInteractiveExchangeRateLink(String baseCurrency, String currency) {
 		getExchangeRate(currency);
 		getExchangeRate(baseCurrency);
-		return URI.create(String.format(INTERACTIVE_EXCHANGE_RATE_CHART_URI, baseCurrency, currency));
+		return new InteractiveExchangeRate(baseCurrency, currency, URI.create(String.format(INTERACTIVE_EXCHANGE_RATE_CHART_URI, baseCurrency, currency)));
 	}
 	
 	
-	public Double convert(Double amount, String currency, String baseCurrency) {
-		Double rate = getExchangeRate(baseCurrency, currency);
-		return rate * amount;
+	public AmountConversion convert(Double amount, String baseCurrency, String currency) {
+		ExchangeRate rate = getExchangeRate(baseCurrency, currency);
+		return new AmountConversion(getPublishDate(), baseCurrency, currency, amount, rate.getResult() * amount);
 	}
 	
 	public LocalDate getPublishDate () {

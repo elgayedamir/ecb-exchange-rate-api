@@ -41,15 +41,16 @@ public class FetchExchangeRatesJobConfiguration {
 	}
 	
 	@Bean
-	public Step fetchCurrencyRatesStep(StepBuilderFactory stepBuilderFactory, 
-			ItemReader<String> itemReader, ItemWriter<String> itemWriter) {
+	public Step fetchCurrencyRatesStep(
+			StepBuilderFactory stepBuilderFactory, 
+			ItemReader<String> itemReader, 
+			ItemWriter<String> itemWriter) {
 		
 		return stepBuilderFactory.get(FETCH_CURRENCY_RATE_STEP_NAME)
 				.<String, String>chunk(STEP_CHUNK_SIZE)
 				.reader(itemReader)
 				.writer(itemWriter)
 				.faultTolerant()
-				//skip if a speech record is not valid in the CSV file
 				.skip(FlatFileParseException.class)
 				.skipLimit(2)
 				//retry when failed to acquire the remote CSV file

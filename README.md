@@ -13,7 +13,7 @@ Data about exchange rates and fetch batch jobs are maintained in memory.
 Terminology:   
 * A pair of currency USD/EUR reads 1 USD = ??? EUR  
 * The first currency in the pair is the <b>base currency</b>  
-* ECB publishes a reference exchange rate against EUR as base; <u>ECB reference exchange rate of USD => EUR/USD</u>  
+* ECB publishes a reference exchange rate against EUR as base; <u>ECB reference exchange rate for USD is <b>EUR/USD</b></u>  
 
 ### List of supported currencies
 
