@@ -19,7 +19,7 @@ import org.springframework.core.io.UrlResource;
 
 /**
  * Custom implementation for an ItemReader that reads the zipped ECB exchange rate CSV file.
- * Extracts files from the zip in a tmp directory and sets them as a {@link Resource} for the {@link FlatFileItemReader} 
+ * Extracts the CSV file from the zip in a tmp directory and sets them as a {@link Resource} for the {@link FlatFileItemReader} 
  */
 public class ZippedExchangeRateReader<T> extends FlatFileItemReader<T> {
 	
