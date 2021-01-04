@@ -61,7 +61,7 @@ public class FetchExchangeRatesJobConfiguration {
 	
 	@Bean
 	public ItemReader<String> exchaneRatesCSVFileReader(LineMapper<String> mapper) throws IOException {
-		ZipFileItemReader<String> reader = new ZipFileItemReader<>();
+		ZippedExchangeRateReader<String> reader = new ZippedExchangeRateReader<>();
 		reader.setArchive(new UrlResource(ECB_DAILY_CSV_EXCHANGE_RATES_URL));
 		reader.setLineMapper(mapper);
 		reader.setEncoding(StandardCharsets.UTF_8.name());

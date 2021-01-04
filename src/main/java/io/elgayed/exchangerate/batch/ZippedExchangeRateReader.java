@@ -18,12 +18,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 
 /**
- * Custom implementation for an ItemReader that reads zipped CSV file resources.
+ * Custom implementation for an ItemReader that reads the zipped ECB exchange rate CSV file.
  * Extracts files from the zip in a tmp directory and sets them as a {@link Resource} for the {@link FlatFileItemReader} 
  */
-public class ZipFileItemReader<T> extends FlatFileItemReader<T> {
+public class ZippedExchangeRateReader<T> extends FlatFileItemReader<T> {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ZipFileItemReader.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ZippedExchangeRateReader.class);
 	
 	private Resource archive;
 	private Path tmpDirectory;
@@ -40,6 +40,7 @@ public class ZipFileItemReader<T> extends FlatFileItemReader<T> {
 			
 			//unzip
 			try (ZipInputStream zipIn = new ZipInputStream(archive.getInputStream())) {
+				// the zipped ECB exchange rate archive should have a single CSV file inside
 				for (ZipEntry zipEntry; (zipEntry = zipIn.getNextEntry()) != null;) {
 					Path unzippedFilePath = tmpDirectory.resolve(zipEntry.getName());
 					Files.copy(zipIn, unzippedFilePath, StandardCopyOption.REPLACE_EXISTING);
