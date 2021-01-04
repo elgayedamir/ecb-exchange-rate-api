@@ -1,4 +1,4 @@
-package de.scalable.microservices.exchangerate.rest;
+package io.elgayed.exchangerate.rest;
 
 import java.io.IOException;
 import java.text.DecimalFormat;

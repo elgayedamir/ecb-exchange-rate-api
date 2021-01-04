@@ -1,4 +1,4 @@
-package de.scalable.microservices.exchangerate.model;
+package io.elgayed.exchangerate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

@@ -1,10 +1,11 @@
-package de.scalable.microservices.exchangerate.service;
+package io.elgayed.exchangerate.service;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.context.annotation.Scope;
@@ -18,13 +19,11 @@ public class CurrencyRatesDS {
 	
 	private LocalDate publishedAt;
 	private Map<String, Double> currencyRates = new ConcurrentHashMap<>();
-	private Map<String, Long> currencyRequestsCount = new ConcurrentHashMap<>();
 	
 	public void updateCurrencyRates (Map<String, Double> currencyRates, LocalDate publishTime) {
 		this.publishedAt = publishTime;
 		this.currencyRates.putAll(currencyRates);
 		this.currencyRates.put(EURO_CURRENCY_SYMBOL, 1.0);
-		this.currencyRates.keySet().stream().forEach(currency -> currencyRequestsCount.putIfAbsent(currency, 0L));
 	}
 	
 	/**
@@ -37,16 +36,15 @@ public class CurrencyRatesDS {
 		Double rate = this.currencyRates.get(currency);
 		if (Objects.isNull(rate))
 			throw new IllegalArgumentException(String.format("The requested currency '%s' is not valid or is not supported", currency));
-		currencyRequestsCount.merge(currency, 1L, Long::sum);
 		return rate;
 	}
 	
 	/**
-	 * Returns supported currencies and how many times they were requested
-	 * @return a map having as key the supported currencies and as value how many times each currency was requested
+	 * Returns supported currencies
+	 * @return a {@link Set} of the supported currencies
 	 */
-	public Map<String, Long> getCurrencies() {
-		return Collections.unmodifiableMap(this.currencyRequestsCount);
+	public Set<String> getCurrencies() {
+		return Collections.unmodifiableSet(this.currencyRates.keySet());
 	}
 	
 	/**

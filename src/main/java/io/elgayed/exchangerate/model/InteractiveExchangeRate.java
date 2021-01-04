@@ -1,4 +1,4 @@
-package de.scalable.microservices.exchangerate.model;
+package io.elgayed.exchangerate.model;
 
 import java.net.URI;
 

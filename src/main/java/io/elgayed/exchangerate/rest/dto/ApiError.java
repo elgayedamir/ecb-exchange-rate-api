@@ -1,4 +1,4 @@
-package de.scalable.microservices.exchangerate.rest.dto;
+package io.elgayed.exchangerate.rest.dto;
 
 /**
  * This class serves as a DTO for errors returned by the REST API end-points 

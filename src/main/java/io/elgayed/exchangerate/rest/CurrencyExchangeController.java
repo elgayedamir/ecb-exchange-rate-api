@@ -1,4 +1,4 @@
-package de.scalable.microservices.exchangerate.rest;
+package io.elgayed.exchangerate.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.scalable.microservices.exchangerate.model.AmountConversion;
-import de.scalable.microservices.exchangerate.model.ExchangeRate;
-import de.scalable.microservices.exchangerate.model.InteractiveExchangeRate;
-import de.scalable.microservices.exchangerate.rest.dto.ApiError;
-import de.scalable.microservices.exchangerate.service.CurrencyRatesDS;
-import de.scalable.microservices.exchangerate.service.ExchangeRateService;
+import io.elgayed.exchangerate.model.AmountConversion;
+import io.elgayed.exchangerate.model.ExchangeRate;
+import io.elgayed.exchangerate.model.InteractiveExchangeRate;
+import io.elgayed.exchangerate.rest.dto.ApiError;
+import io.elgayed.exchangerate.service.CurrencyRatesDS;
+import io.elgayed.exchangerate.service.ExchangeRateService;
 
 @RestController
 @RequestMapping(path = "currency")

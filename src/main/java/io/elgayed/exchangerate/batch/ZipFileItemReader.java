@@ -1,4 +1,4 @@
-package de.scalable.microservices.exchangerate.batch;
+package io.elgayed.exchangerate.batch;
 
 import java.io.IOException;
 import java.nio.file.Files;

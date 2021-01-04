@@ -1,16 +1,15 @@
-package de.scalable.microservices.exchangerate.service;
+package io.elgayed.exchangerate.service;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.scalable.microservices.exchangerate.model.AmountConversion;
-import de.scalable.microservices.exchangerate.model.ExchangeRate;
-import de.scalable.microservices.exchangerate.model.InteractiveExchangeRate;
+import io.elgayed.exchangerate.model.AmountConversion;
+import io.elgayed.exchangerate.model.ExchangeRate;
+import io.elgayed.exchangerate.model.InteractiveExchangeRate;
 
 @Service
 public class ExchangeRateService {
@@ -20,7 +19,7 @@ public class ExchangeRateService {
 	@Autowired
 	private CurrencyRatesDS dataSource;
 	
-	public Map<String, Long> getSupportedCurrencies() {
+	public Set<String> getSupportedCurrencies() {
 		return dataSource.getCurrencies();
 	}
 	

@@ -1,4 +1,4 @@
-package de.scalable.microservices.exchangerate.batch;
+package io.elgayed.exchangerate.batch;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
