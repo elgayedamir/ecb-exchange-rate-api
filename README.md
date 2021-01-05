@@ -87,7 +87,7 @@ Builds a cloud native docker image using `buildpacks`
 Builds a docker image using `docker engine`
 
 ```
-docker build -t scalable.de/microservices/exchange-rate-service:0.0.1-SNAPSHOT .
+docker build -t elgayed.io/backend/exchange-rate-service:0.0.1-SNAPSHOT .
 ```
 
 ## Run
@@ -106,5 +106,5 @@ java -jar <PATH_TO>/exchange-rate-service.jar
 * Running docker image
 
 ```
-docker run -p 8080:8080 --name exchange-rate-service-container scalable.de/microservices/exchange-rate-service:0.0.1-SNAPSHOT
+docker run -p 8080:8080 --name exchange-rate-service-container elgayed.io/backend/exchange-rate-service:0.0.1-SNAPSHOT
 ```

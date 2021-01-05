@@ -74,7 +74,7 @@
 					</layers>
 					<image>
 						<!-- Custom docker image name to be used when using buildpacks to build cloud native docker image -->
-						<name>scalable.de/microservices/${project.artifactId}:${project.version}</name>
+						<name>elgayed.io/microservices/${project.artifactId}:${project.version}</name>
 					</image>
 				</configuration>
 			</plugin>
