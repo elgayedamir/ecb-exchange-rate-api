@@ -1,13 +1,14 @@
 package io.elgayed.exchangerate.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ExchangeRate extends CurrencyPair{
 	
 	private LocalDate publishedAt;
-	private Double result;
+	private BigDecimal result;
 	
-	public ExchangeRate(LocalDate publishedAt, String base, String currency, Double result) {
+	public ExchangeRate(LocalDate publishedAt, String base, String currency, BigDecimal result) {
 		super(base, currency);
 		this.publishedAt = publishedAt;
 		this.result = result;
@@ -21,11 +22,11 @@ public class ExchangeRate extends CurrencyPair{
 		this.publishedAt = publishedAt;
 	}
 
-	public Double getResult() {
+	public BigDecimal getResult() {
 		return result;
 	}
 
-	public void setResult(Double result) {
+	public void setResult(BigDecimal result) {
 		this.result = result;
 	}
 }

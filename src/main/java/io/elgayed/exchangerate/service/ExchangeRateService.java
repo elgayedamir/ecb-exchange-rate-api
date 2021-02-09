@@ -1,5 +1,7 @@
 package io.elgayed.exchangerate.service;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.Set;
@@ -23,15 +25,15 @@ public class ExchangeRateService {
 		return dataSource.getCurrencies();
 	}
 	
-	public Double getExchangeRate(String currency) {
-		Double rate = dataSource.getCurrencyExchangeRate(currency.toUpperCase());
+	public BigDecimal getExchangeRate(String currency) {
+		BigDecimal rate = dataSource.getCurrencyExchangeRate(currency.toUpperCase());
 		return rate;
 	}
 	
 	public ExchangeRate getExchangeRate(String baseCurrency, String currency) {
-		Double rate = getExchangeRate(currency.toUpperCase());
-		Double baseCurrencyRate = getExchangeRate(baseCurrency.toUpperCase());
-		return new ExchangeRate(getPublishDate(), baseCurrency, currency, rate/baseCurrencyRate);
+		BigDecimal rate = getExchangeRate(currency.toUpperCase());
+		BigDecimal baseCurrencyRate = getExchangeRate(baseCurrency.toUpperCase());
+		return new ExchangeRate(getPublishDate(), baseCurrency, currency, rate.divide(baseCurrencyRate, MathContext.DECIMAL64));
 	}
 	
 	public InteractiveExchangeRate generateInteractiveExchangeRateLink(String baseCurrency, String currency) {
@@ -43,7 +45,8 @@ public class ExchangeRateService {
 	
 	public AmountConversion convert(Double amount, String baseCurrency, String currency) {
 		ExchangeRate rate = getExchangeRate(baseCurrency, currency);
-		return new AmountConversion(getPublishDate(), baseCurrency, currency, amount, rate.getResult() * amount);
+		BigDecimal preciseAmount = new BigDecimal(amount);
+		return new AmountConversion(getPublishDate(), baseCurrency, currency, preciseAmount, rate.getResult().multiply(preciseAmount));
 	}
 	
 	public LocalDate getPublishDate () {

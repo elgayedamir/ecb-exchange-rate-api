@@ -1,5 +1,6 @@
 package io.elgayed.exchangerate.batch;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -29,9 +30,9 @@ public class CurrencyRatesWriter implements ItemWriter<String> {
 		
 		String[] keys = items.get(0).split(", ");
 		String[] values = items.get(1).split(", ");
-		Map<String, Double> currenciesRate = new HashMap<>();
+		Map<String, BigDecimal> currenciesRate = new HashMap<>();
 		for (int i = 1; i < keys.length; i++)
-			currenciesRate.put(keys[i], Double.valueOf(values[i]));
+			currenciesRate.put(keys[i], new BigDecimal(values[i]));
 		
 		String publishDateValue = values[0];
 		LocalDate publishDate = LocalDate.parse(publishDateValue, DateTimeFormatter.ofPattern(CSV_EXCHANGE_RATE_PUBLISHING_DATE_FORMAT));

@@ -1,5 +1,6 @@
 package io.elgayed.exchangerate.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
@@ -18,12 +19,12 @@ public class CurrencyRatesDS {
 	public static final String EURO_CURRENCY_SYMBOL = "EUR";
 	
 	private LocalDate publishedAt;
-	private Map<String, Double> currencyRates = new ConcurrentHashMap<>();
+	private Map<String, BigDecimal> currencyRates = new ConcurrentHashMap<>();
 	
-	public void updateCurrencyRates (Map<String, Double> currencyRates, LocalDate publishTime) {
+	public void updateCurrencyRates (Map<String, BigDecimal> currencyRates, LocalDate publishTime) {
 		this.publishedAt = publishTime;
 		this.currencyRates.putAll(currencyRates);
-		this.currencyRates.put(EURO_CURRENCY_SYMBOL, 1.0);
+		this.currencyRates.put(EURO_CURRENCY_SYMBOL, BigDecimal.ONE);
 	}
 	
 	/**
@@ -32,8 +33,8 @@ public class CurrencyRatesDS {
 	 * @return the exchange rate of the given currency against euro
 	 * @throws IllegalArgumentException if the given currency is not supported
 	 */
-	public Double getCurrencyExchangeRate (String currency) {
-		Double rate = this.currencyRates.get(currency);
+	public BigDecimal getCurrencyExchangeRate (String currency) {
+		BigDecimal rate = this.currencyRates.get(currency);
 		if (Objects.isNull(rate))
 			throw new IllegalArgumentException(String.format("The requested currency '%s' is not valid or is not supported", currency));
 		return rate;
